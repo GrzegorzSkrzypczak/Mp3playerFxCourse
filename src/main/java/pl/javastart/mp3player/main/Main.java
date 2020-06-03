@@ -3,7 +3,7 @@ package pl.javastart.mp3player.main;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -14,7 +14,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Pane mainPane = FXMLLoader.load(getClass().getResource("/mainPane.fxml"));
+        BorderPane mainPane = FXMLLoader.load(getClass().getResource("/mainPane.fxml"));
         Scene scene = new Scene(mainPane);
         stage.setScene(scene);
         stage.setTitle("Mp3 Player");
