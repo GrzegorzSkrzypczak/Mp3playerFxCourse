@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 
-<BorderPane xmlns="http://javafx.com/javafx/10.0.1">
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.javastart.mp3player.controller.MainController">
    <top>
       <AnchorPane BorderPane.alignment="CENTER">
          <children>
@@ -20,39 +20,42 @@
                <menus>
                   <Menu mnemonicParsing="false" text="File">
                      <items>
-                        <MenuItem mnemonicParsing="false" text="Open Mp3 File" />
-                        <MenuItem mnemonicParsing="false" text="Open directory" />
-                        <MenuItem mnemonicParsing="false" text="Close" />
+                        <MenuItem fx:id="fileMenuItem" mnemonicParsing="false" text="Open Mp3 File"/>
+                        <MenuItem fx:id="dirMenuItem" mnemonicParsing="false" text="Open directory"/>
+                        <MenuItem fx:id="closeMenuItem" mnemonicParsing="false" text="Close"/>
                      </items>
                   </Menu>
                   <Menu mnemonicParsing="false" text="Help">
                      <items>
-                        <MenuItem mnemonicParsing="false" text="About" />
+                        <MenuItem fx:id="aboutMenuItem" mnemonicParsing="false" text="About"/>
                      </items>
                   </Menu>
                </menus>
             </MenuBar>
-         </children></AnchorPane>
+         </children>
+      </AnchorPane>
    </top>
    <center>
       <AnchorPane BorderPane.alignment="CENTER">
          <children>
-            <TableView prefHeight="200.0" prefWidth="200.0">
+            <TableView fx:id="contentTable" prefHeight="200.0" prefWidth="200.0">
                <columns>
-                  <TableColumn prefWidth="75.0" text="C1" />
-                  <TableColumn prefWidth="75.0" text="C2" />
+                  <TableColumn prefWidth="75.0" text="C1"/>
+                  <TableColumn prefWidth="75.0" text="C2"/>
                </columns>
             </TableView>
-         </children></AnchorPane>
+         </children>
+      </AnchorPane>
    </center>
    <bottom>
       <HBox BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" text="Button" />
-            <ToggleButton mnemonicParsing="false" text="ToggleButton" />
-            <Button mnemonicParsing="false" text="Button" />
-            <Slider />
-            <Slider />
-         </children></HBox>
+            <Button fx:id="previousButton" mnemonicParsing="false" text="Button"/>
+            <ToggleButton fx:id="playButton" mnemonicParsing="false" text="ToggleButton"/>
+            <Button fx:id="nextButton" mnemonicParsing="false" text="Button"/>
+            <Slider fx:id="volumeSlider"/>
+            <Slider fx:id="progressSlider"/>
+         </children>
+      </HBox>
    </bottom>
 </BorderPane>
