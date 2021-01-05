@@ -1,4 +1,4 @@
-package pl.javastart.mp3player.main;
+package pl.grzegorz.mp3player.main;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

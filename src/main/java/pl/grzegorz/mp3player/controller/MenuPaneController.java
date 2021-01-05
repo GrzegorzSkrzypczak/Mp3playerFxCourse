@@ -1,4 +1,4 @@
-package pl.javastart.mp3player.controller;
+package pl.grzegorz.mp3player.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
