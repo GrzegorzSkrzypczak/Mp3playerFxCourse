@@ -3,14 +3,15 @@ package pl.grzegorz.mp3player.controller;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Slider;
-import javafx.scene.control.TableView;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.farng.mp3.MP3File;
 import org.farng.mp3.TagException;
+import pl.grzegorz.mp3player.mp3.Mp3Parser;
 import pl.grzegorz.mp3player.mp3.Mp3Song;
 import pl.grzegorz.mp3player.mp3.player.Mp3Player;
 
@@ -31,7 +32,7 @@ public class MainController {
         createPlayer();
         configureTableClick();
         configureButtons();
-        addMp3Test();
+        configureMenu();
     }
 
     private void createPlayer() {
@@ -42,15 +43,15 @@ public class MainController {
     private void configureTableClick() {
         TableView<Mp3Song> contentTable = contentPaneController.getContentTable();
         contentTable.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-            if(event.getClickCount() == 2){
-                int selectIndex = contentTable.getSelectionModel().getSelectedIndex();
-                playSelectedSong(selectIndex);
+            if (event.getClickCount() == 2) {
+                int selectedIndex = contentTable.getSelectionModel().getSelectedIndex();
+                playSelectedSong(selectedIndex);
             }
         });
     }
 
-    public void playSelectedSong(int selectIndex){
-        player.loadSong(selectIndex);
+    private void playSelectedSong(int selectedIndex) {
+        player.loadSong(selectedIndex);
         configureProgressBar();
         configureVolume();
         controlPaneController.getPlayButton().setSelected(true);
@@ -73,20 +74,20 @@ public class MainController {
     }
 
     private void configureVolume() {
-        Slider volumeSlider = controlPaneController.getVolumeSlider();;
+        Slider volumeSlider = controlPaneController.getVolumeSlider();
         volumeSlider.valueProperty().unbind();
         volumeSlider.setMax(1.0);
         volumeSlider.valueProperty().bindBidirectional(player.getMediaPlayer().volumeProperty());
     }
 
-    private void configureButtons(){
+    private void configureButtons() {
         TableView<Mp3Song> contentTable = contentPaneController.getContentTable();
         ToggleButton playButton = controlPaneController.getPlayButton();
         Button prevButton = controlPaneController.getPreviousButton();
         Button nextButton = controlPaneController.getNextButton();
 
         playButton.setOnAction(event -> {
-            if(playButton.isSelected()) {
+            if (playButton.isSelected()) {
                 player.play();
             } else {
                 player.stop();
@@ -94,33 +95,39 @@ public class MainController {
         });
 
         nextButton.setOnAction(event -> {
-            contentTable.getSelectionModel().select(contentTable.getSelectionModel().getSelectedIndex() -1);
+            contentTable.getSelectionModel().select(contentTable.getSelectionModel().getSelectedIndex() + 1);
+            playSelectedSong(contentTable.getSelectionModel().getSelectedIndex());
+        });
+
+        prevButton.setOnAction(event -> {
+            contentTable.getSelectionModel().select(contentTable.getSelectionModel().getSelectedIndex() - 1);
             playSelectedSong(contentTable.getSelectionModel().getSelectedIndex());
         });
     }
 
-    private void addMp3Test() {
-        ObservableList<Mp3Song> items = contentPaneController.getContentTable().getItems();
-        Mp3Song mp3SongFromFile = createMp3SongFromPath("Halo.mp3");
-        items.add(mp3SongFromFile);
-        items.add(mp3SongFromFile);
-        items.add(mp3SongFromFile);
-    }
+    private void configureMenu() {
+        MenuItem openFile = menuPaneController.getFileMenuItem();
+        MenuItem openDir = menuPaneController.getDirMenuItem();
 
-    private Mp3Song createMp3SongFromPath(String path) {
-        File file = new File(path);
+        openFile.setOnAction(event -> {
+            FileChooser fc = new FileChooser();
+            fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Mp3", "*.mp3"));
+            File file = fc.showOpenDialog(new Stage());
+            try {
+                contentPaneController.getContentTable().getItems().add(Mp3Parser.createMp3Song(file));
+            } catch (Exception e) {
+                e.printStackTrace(); //ignore
+            }
+        });
 
-        try {
-            MP3File mp3File = new MP3File(file);
-            String absolutePath = file.getAbsolutePath();
-            String title = mp3File.getID3v2Tag().getSongTitle();
-            String author = mp3File.getID3v2Tag().getLeadArtist();
-            String album = mp3File.getID3v2Tag().getAlbumTitle();
-            return new Mp3Song(title,author,album,absolutePath);
-
-        } catch (IOException | TagException e) {
-            e.printStackTrace();
-            return null;
-        }
+        openDir.setOnAction(event -> {
+            DirectoryChooser dc = new DirectoryChooser();
+            File dir = dc.showDialog(new Stage());
+            try {
+                contentPaneController.getContentTable().getItems().addAll(Mp3Parser.createMp3List(dir));
+            } catch (Exception e) {
+                e.printStackTrace(); //ignore
+            }
+        });
     }
 }

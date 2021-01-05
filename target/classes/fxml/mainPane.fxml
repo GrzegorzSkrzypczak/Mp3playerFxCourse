@@ -4,7 +4,7 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="pl.grzegorz.mp3player.controller.MainController"
-            stylesheets="@css/style.css">
+            stylesheets="@../css/style.css">
     <top>
         <fx:include fx:id="menuPane" source="menuPane.fxml"/>
     </top>

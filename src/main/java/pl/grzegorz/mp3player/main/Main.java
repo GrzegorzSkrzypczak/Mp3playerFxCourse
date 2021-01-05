@@ -14,7 +14,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        BorderPane mainPane = FXMLLoader.load(getClass().getResource("/mainPane.fxml"));
+        BorderPane mainPane = FXMLLoader.load(getClass().getResource("/fxml/mainPane.fxml"));
         Scene scene = new Scene(mainPane);
         stage.setScene(scene);
         stage.setTitle("Mp3 Player");
