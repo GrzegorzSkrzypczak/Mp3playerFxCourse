@@ -22,8 +22,8 @@ public class Mp3Player {
     }
 
     public void play() {
-        if(mediaPlayer != null && (mediaPlayer.getStatus() == MediaPlayer.Status.READY
-        || mediaPlayer.getStatus() == MediaPlayer.Status.PAUSED)) {
+        if (mediaPlayer != null && (mediaPlayer.getStatus() == MediaPlayer.Status.READY
+                || mediaPlayer.getStatus() == MediaPlayer.Status.PAUSED)) {
             mediaPlayer.play();
         }
     }
@@ -35,21 +35,21 @@ public class Mp3Player {
     }
 
     public double getLoadedSongLenght() {
-        if(mediaPlayer != null) {
+        if (mediaPlayer != null) {
             return media.getDuration().toSeconds();
         } else {
             return 0;
         }
     }
 
-    public void setVolume(double volume){
-        if(mediaPlayer != null){
+    public void setVolume(double volume) {
+        if (mediaPlayer != null) {
             mediaPlayer.setVolume(volume);
         }
     }
 
-    public void loadSong(int index){
-        if(mediaPlayer != null && mediaPlayer.getStatus() == MediaPlayer.Status.PLAYING) {
+    public void loadSong(int index) {
+        if (mediaPlayer != null && mediaPlayer.getStatus() == MediaPlayer.Status.PLAYING) {
             mediaPlayer.stop();
         }
 
@@ -57,7 +57,7 @@ public class Mp3Player {
         media = new Media(new File(mp3s.getFilePath()).toURI().toString());
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.statusProperty().addListener((observable, oldStatus, newStatus) -> {
-            if(newStatus == MediaPlayer.Status.READY)
+            if (newStatus == MediaPlayer.Status.READY)
                 mediaPlayer.setAutoPlay(true);
         });
     }

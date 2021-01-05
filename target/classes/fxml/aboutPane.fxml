@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.*?>
-
 <AnchorPane prefHeight="300.0" prefWidth="400.0"
             xmlns="http://javafx.com/javafx/10.0.1">
     <children>
@@ -14,6 +13,6 @@
 
 &#10;http://javamusictag.sourceforge.net/"
                   AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                  AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
     </children>
 </AnchorPane>

@@ -20,14 +20,14 @@ public class Mp3Parser {
     }
 
     public static List<Mp3Song> createMp3List(File dir) throws IOException, TagException {
-        if(!dir.isDirectory()) {
+        if (!dir.isDirectory()) {
             throw new IllegalArgumentException("Not a directory");
         }
         List<Mp3Song> songList = new ArrayList<>();
         File[] files = dir.listFiles();
-        for(File f: files) {
+        for (File f : files) {
             String fileExtension = f.getName().substring(f.getName().lastIndexOf(".") + 1);
-            if(fileExtension.equals("mp3"))
+            if (fileExtension.equals("mp3"))
                 songList.add(createMp3Song(f));
         }
 

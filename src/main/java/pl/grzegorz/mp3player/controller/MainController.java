@@ -9,14 +9,11 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import org.farng.mp3.MP3File;
-import org.farng.mp3.TagException;
 import pl.grzegorz.mp3player.mp3.Mp3Parser;
 import pl.grzegorz.mp3player.mp3.Mp3Song;
 import pl.grzegorz.mp3player.mp3.player.Mp3Player;
 
 import java.io.File;
-import java.io.IOException;
 
 public class MainController {
     @FXML
@@ -66,7 +63,7 @@ public class MainController {
                 progressSlider.setValue(newVal.toSeconds()));
         //przesunięcie suwaka spowoduje przewinięcie piosenki do wskazanego miejsca
         progressSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
-            if(progressSlider.isValueChanging()) {
+            if (progressSlider.isValueChanging()) {
                 player.getMediaPlayer().seek(Duration.seconds(newValue.doubleValue()));
             }
 
