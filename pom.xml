@@ -14,7 +14,6 @@
         <maven.compiler.target>11</maven.compiler.target>
         <javafx.version>11.0.1</javafx.version>
         <jid3lib.version>0.5.4</jid3lib.version>
-        <javafx-media.version>15.0.1</javafx-media.version>
 
     </properties>
 
@@ -42,7 +41,7 @@
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-media</artifactId>
-            <version>${javafx-media.version}</version>
+            <version>15.0.1</version>
         </dependency>
 
     </dependencies>

@@ -3,6 +3,7 @@ package pl.grzegorz.mp3player.controller;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 
 public class ControlPaneController {
@@ -20,6 +21,9 @@ public class ControlPaneController {
 
     @FXML
     private Slider progressSlider;
+
+    @FXML
+    private TextField messageTextField;
 
     public Button getPreviousButton() {
         return previousButton;
@@ -41,4 +45,7 @@ public class ControlPaneController {
         return progressSlider;
     }
 
+    public TextField getMessageTextField() {
+        return messageTextField;
+    }
 }
